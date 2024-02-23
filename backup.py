@@ -3,18 +3,19 @@ import os
 import subprocess
 from datetime import datetime
 from talon import Module, actions, app
+import time
 
 mod = Module()
 
 folders = {
-    'root': os.path.expanduser(r"C:\\Users\\Emmanuel\\AppData\\Roaming\\talon\\user\\em"),
-    'github-backup': os.path.expanduser(r"C:\\Users\\Emmanuel\\Documents\\GitHub\\talon-scripts\\talon-scripts")
+    'root': os.path.expanduser(r"C:\Users\Emmanuel\AppData\Roaming\talon\user\em"),
+    'github-backup': os.path.expanduser(r"C:\Users\Emmanuel\Documents\GitHub\talon-scripts\talon-scripts")
 }
 
 @mod.action_class
 class UserActions:
-    def backup_and_commit_scripts(source: str, destination: str):
-        """Copies scripts from the specified source folder to the specified destination folder and commits them."""
+    def deploy_talon_scripts(source: str, destination: str):
+        """Deploys scripts from the GitHub repository to the Talon user folder."""
         source_dir = folders.get(source, '')
         destination_dir = folders.get(destination, '')
         
@@ -22,14 +23,22 @@ class UserActions:
             app.notify("Source or destination path is not defined.")
             return
         
-        # Ensure the destination directory exists
-        os.makedirs(destination_dir, exist_ok=True)
+        # Ensure the source directory exists
+        if not os.path.exists(source_dir):
+            app.notify(f"Source directory does not exist: {source_dir}")
+            return
         
         try:
-            # List all files and directories in source directory
-            entries = os.listdir(source_dir)
+            # Clean destination directory before deploying
+            for entry in os.listdir(destination_dir):
+                full_path = os.path.join(destination_dir, entry)
+                if os.path.isfile(full_path):
+                    os.remove(full_path)
+                elif os.path.isdir(full_path):
+                    shutil.rmtree(full_path)
             
-            # Copy each item to the destination directory
+            # Copy each item from the source to the destination directory
+            entries = os.listdir(source_dir)
             for entry in entries:
                 full_entry_name = os.path.join(source_dir, entry)
                 if os.path.isfile(full_entry_name):
@@ -55,4 +64,4 @@ class UserActions:
             
             app.notify("Scripts backed up and committed successfully.")
         except Exception as e:
-            app.notify(f"Failed to backup and commit scripts: {str(e)}")
+            app.notify(f"Failed to deploy Talon scripts: {str(e)}")
