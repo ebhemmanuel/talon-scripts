@@ -7,8 +7,7 @@ key(pause): user.mic_toggle()
 #stop: user.pause_released_actions()
 stop: user.mic_off()
 mute: key(f8)
-deploy talon scripts: user.deploy_talon_scripts("github-backup", "root")
-# backup and commit scripts to github every 15 minutes
+backup files: user.backup_and_commit_scripts("root", "github-backup")
 
 
 # Moving Windows
@@ -36,7 +35,7 @@ new line: key(shift-enter)
 fullscreen: key(f11)
 f12: key(f12)
 remove file: key(delete)
-switch apps: key(ctrl+shift+alt-tab)
+switch apps: key(ctrl-shift-alt-tab)
 listen: key(win-h)
 end: key(end)
 blowup: key(win-tab)
@@ -54,7 +53,7 @@ save: key(ctrl-s)
 print: key(ctrl-p)
 
 # Web browsing shortcuts
-reload: key(ctrl-r)
+reload: key(ctrl+r)
 hard reload: key(ctrl+shift-r)
 new tab: key(ctrl-t)
 new window: key(ctrl-n)
