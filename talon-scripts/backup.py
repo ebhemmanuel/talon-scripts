@@ -8,7 +8,7 @@ mod = Module()
 
 folders = {
     'root': os.path.expanduser(r"C:\\Users\\Emmanuel\\AppData\\Roaming\\talon\\user\\em"),
-    'github-backup': os.path.expanduser(r"C:\\Users\\Emmanuel\\Documents\\GitHub\\talon-scripts\\talon-scripts\\talon-scripts")
+    'github-backup': os.path.expanduser(r"C:\\Users\\Emmanuel\\Documents\\GitHub\\talon-scripts\\talon-scripts")
 }
 
 @mod.action_class

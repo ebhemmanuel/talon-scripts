@@ -35,7 +35,7 @@ remove file:            key(delete)
 listen:                 key(win-h)
 end:                    key(end)
 blowup:                 key(win-tab)
-refresh:                key(f5)
+
 
 # Text manipulation
 copy:                   key(ctrl-c)
@@ -50,7 +50,7 @@ print:                  key(ctrl-p)
 save:                   key(ctrl-s)
 
 # Web browsing shortcuts
-reload:                 key(ctrl+r)
+refresh:                key(f5)
 hard reload:            key(ctrl+shift-r)
 new tab:                key(ctrl-t)
 new window:             key(ctrl-n)
